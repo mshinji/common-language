@@ -54,7 +54,7 @@
 }
 
 .center {
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,16 +62,18 @@
 
 .genres {
   display: flex;
+  margin-top: 30px;
+  width: 95%;
+  max-width: 600px;
   justify-self: space-between;
 }
 
 .genre {
-  margin-top: 20px;
   padding-left: 5px;
   padding-bottom: 15px;
   padding-right: 5px;
-  width: 100px;
   line-height: 16px;
+  width: 16%;
   font-size: 16px;
 }
 
@@ -110,4 +112,14 @@
 
 .pointer:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  .genre {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 1px;
+    font-size: 12px;
+    line-height: 12px;
+  }
 }
