@@ -44,12 +44,6 @@ const App = () => {
   const [wrongAnswers, setWrongAnswers] = useState<number[]>([]);
   const [quiz, setQuiz] = useState<any>([]);
 
-  const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const key = e.code;
-    if (key === "Space") {
-    }
-  };
-
   const resetQuiz = () => {
     setCount(0);
     alert(
@@ -77,7 +71,7 @@ const App = () => {
   return quiz.length === 0 ? (
     <></>
   ) : (
-    <div className="App" onKeyDown={keyDownHandler}>
+    <div className="App">
       <div className="left">
         {wrongAnswers.map((wrongAnswer) => (
           <Tooltip
