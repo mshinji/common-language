@@ -50,6 +50,24 @@ const App = () => {
     }
   };
 
+  const resetQuiz = () => {
+    setCount(0);
+    alert(
+      "正解率 " +
+        Math.round(
+          (correctAnswers.length /
+            (correctAnswers.length + wrongAnswers.length)) *
+            100 *
+            10
+        ) /
+          10 +
+        "%"
+    );
+    setQuiz(shuffledIndex(genre));
+    setCorrectAnswers([]);
+    setWrongAnswers([]);
+  };
+
   useEffect(() => {
     setQuiz(shuffledIndex(genre));
     setCorrectAnswers([]);
@@ -119,10 +137,10 @@ const App = () => {
                 onClick={() => {
                   setIsAnswerShow(false);
                   setWrongAnswers([quiz[count], ...wrongAnswers]);
-                  if (count + 1 < words.length) {
+                  if (count + 1 < quiz.length) {
                     setCount(count + 1);
                   } else {
-                    setCount(0);
+                    resetQuiz();
                   }
                 }}
               />
@@ -134,10 +152,10 @@ const App = () => {
                 onClick={() => {
                   setIsAnswerShow(false);
                   setCorrectAnswers([quiz[count], ...correctAnswers]);
-                  if (count + 1 < words.length) {
+                  if (count + 1 < quiz.length) {
                     setCount(count + 1);
                   } else {
-                    setCount(0);
+                    resetQuiz();
                   }
                 }}
               />
