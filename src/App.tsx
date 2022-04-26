@@ -3,6 +3,13 @@ import { words } from "./words";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Tooltip, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  tooltip: {
+    fontSize: "1em",
+  },
+});
 
 const shuffledIndex = () => {
   let arr = [];
@@ -21,6 +28,8 @@ const shuffledIndex = () => {
 const index = shuffledIndex();
 
 const App = () => {
+  const classes = useStyles();
+
   const [count, setCount] = useState(0);
   const [isAnswerShow, setIsAnswerShow] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState<number[]>([]);
@@ -36,12 +45,18 @@ const App = () => {
     <div className="App" onKeyDown={keyDownHandler}>
       <div className="left">
         {wrongAnswers.map((wrongAnswer) => (
-          <p>{words[wrongAnswer][1]}</p>
+          <Tooltip
+            classes={{ tooltip: classes.tooltip }}
+            title={words[wrongAnswer][2]}
+            placement="right-end"
+          >
+            <p className="tooltip">{words[wrongAnswer][1]}</p>
+          </Tooltip>
         ))}
       </div>
       <div className="center">
         <h4>
-          正解率:{" "}
+          正解率:
           {correctAnswers.length + wrongAnswers.length === 0
             ? 0
             : Math.round(
