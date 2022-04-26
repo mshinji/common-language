@@ -60,8 +60,22 @@
   align-items: center;
 }
 
-.category {
-  height: 40px;
+.genres {
+  display: flex;
+  justify-self: space-between;
+}
+
+.genre {
+  margin: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 90px;
+  line-height: 16px;
+  font-size: 16px;
+}
+
+.current {
+  border-bottom: 1px solid red;
 }
 
 .quiz {

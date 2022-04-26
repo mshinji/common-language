@@ -1,6 +1,6 @@
 import "./App.css";
 import { words } from "./words";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip, makeStyles } from "@material-ui/core";
@@ -11,10 +11,10 @@ const useStyles = makeStyles({
   },
 });
 
-const shuffledIndex = () => {
+const shuffledIndex = (genre: string): any => {
   let arr = [];
   for (let i = 0; i < words.length; i++) {
-    arr.push(i);
+    if (genre == "なし" || words[i][0] === genre) arr.push(i);
   }
 
   for (let i = arr.length - 1; i >= 0; i--) {
@@ -25,21 +25,26 @@ const shuffledIndex = () => {
   return arr;
 };
 
-const index = shuffledIndex();
-
 const App = () => {
   const classes = useStyles();
+  const genres = ["新規", "CRM", "ECモール", "SNS", "デザイン", "ビジネス用語"];
 
   const [count, setCount] = useState(0);
   const [isAnswerShow, setIsAnswerShow] = useState(false);
+  const [genre, setGenre] = useState("なし");
   const [correctAnswers, setCorrectAnswers] = useState<number[]>([]);
   const [wrongAnswers, setWrongAnswers] = useState<number[]>([]);
+  const [quiz, setQuiz] = useState<any>([]);
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const key = e.code;
     if (key === "Space") {
     }
   };
+
+  useEffect(() => {
+    setQuiz(shuffledIndex(genre));
+  }, [genre]);
 
   return (
     <div className="App" onKeyDown={keyDownHandler}>
@@ -80,8 +85,17 @@ const App = () => {
           % ({correctAnswers.length} / &thinsp;
           {correctAnswers.length + wrongAnswers.length})
         </div>
-        <h3 className="category">{words[index[count]][0]}</h3>
-        <h1 className="quiz">{words[index[count]][1]}</h1>
+        <div className="genres">
+          {genres.map((g) => (
+            <div
+              className={`genre ${g == genre && "current"}`}
+              onClick={() => setGenre(g)}
+            >
+              {g}
+            </div>
+          ))}
+        </div>
+        <h1 className="quiz">{words[quiz[count]][1]}</h1>
         {isAnswerShow ? (
           <>
             <div className="result">
@@ -92,7 +106,7 @@ const App = () => {
                 size="3x"
                 onClick={() => {
                   setIsAnswerShow(false);
-                  setWrongAnswers([index[count], ...wrongAnswers]);
+                  setWrongAnswers([quiz[count], ...wrongAnswers]);
                   if (count + 1 < words.length) {
                     setCount(count + 1);
                   } else {
@@ -107,7 +121,7 @@ const App = () => {
                 size="3x"
                 onClick={() => {
                   setIsAnswerShow(false);
-                  setCorrectAnswers([index[count], ...correctAnswers]);
+                  setCorrectAnswers([quiz[count], ...correctAnswers]);
                   if (count + 1 < words.length) {
                     setCount(count + 1);
                   } else {
@@ -117,7 +131,7 @@ const App = () => {
               />
             </div>
 
-            <h4 className="answer">{words[index[count]][2]}</h4>
+            <h4 className="answer">{words[quiz[count]][2]}</h4>
           </>
         ) : (
           <div className="button" onClick={() => setIsAnswerShow(true)}>
