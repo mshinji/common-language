@@ -112,7 +112,13 @@ const App = () => {
       </div>
       <div className="right">
         {correctAnswers.map((correctAnswer) => (
-          <p>{words[correctAnswer][1]}</p>
+          <Tooltip
+            classes={{ tooltip: classes.tooltip }}
+            title={words[correctAnswer][2]}
+            placement="left-end"
+          >
+            <p className="tooltip">{words[correctAnswer][1]}</p>
+          </Tooltip>
         ))}
       </div>
     </div>
