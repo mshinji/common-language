@@ -56,6 +56,17 @@ const App = () => {
       </div>
       <div className="center">
         <div className="correct-rate">
+          進捗率:
+          {correctAnswers.length + wrongAnswers.length === 0
+            ? 0
+            : Math.round(
+                ((correctAnswers.length + wrongAnswers.length) / words.length) *
+                  100 *
+                  10
+              ) / 10}
+          % ({correctAnswers.length + wrongAnswers.length} &thinsp;/ &thinsp;
+          {words.length})
+          <br />
           正解率:
           {correctAnswers.length + wrongAnswers.length === 0
             ? 0
