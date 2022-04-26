@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 const shuffledIndex = () => {
   let arr = [];
   for (let i = 0; i < words.length; i++) {
-    if (words[i][0] === "新規") arr.push(i);
+    arr.push(i);
   }
 
   for (let i = arr.length - 1; i >= 0; i--) {
