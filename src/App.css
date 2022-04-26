@@ -66,16 +66,17 @@
 }
 
 .genre {
-  margin: 20px;
+  margin-top: 20px;
   padding-left: 5px;
+  padding-bottom: 15px;
   padding-right: 5px;
-  width: 90px;
+  width: 100px;
   line-height: 16px;
   font-size: 16px;
 }
 
 .current {
-  border-bottom: 1px solid red;
+  border-bottom: 2px solid red;
 }
 
 .quiz {

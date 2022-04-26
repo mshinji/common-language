@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 const shuffledIndex = (genre: string): any => {
   let arr = [];
   for (let i = 0; i < words.length; i++) {
-    if (genre == "なし" || words[i][0] === genre) arr.push(i);
+    if (genre === "なし" || words[i][0] === genre) arr.push(i);
   }
 
   for (let i = arr.length - 1; i >= 0; i--) {
@@ -27,7 +27,15 @@ const shuffledIndex = (genre: string): any => {
 
 const App = () => {
   const classes = useStyles();
-  const genres = ["新規", "CRM", "ECモール", "SNS", "デザイン", "ビジネス用語"];
+  const genres = [
+    "なし",
+    "新規",
+    "CRM",
+    "ECモール",
+    "SNS",
+    "デザイン",
+    "ビジネス用語",
+  ];
 
   const [count, setCount] = useState(0);
   const [isAnswerShow, setIsAnswerShow] = useState(false);
@@ -44,9 +52,13 @@ const App = () => {
 
   useEffect(() => {
     setQuiz(shuffledIndex(genre));
+    setCorrectAnswers([]);
+    setWrongAnswers([]);
   }, [genre]);
 
-  return (
+  return quiz.length === 0 ? (
+    <></>
+  ) : (
     <div className="App" onKeyDown={keyDownHandler}>
       <div className="left">
         {wrongAnswers.map((wrongAnswer) => (
@@ -66,12 +78,12 @@ const App = () => {
           {correctAnswers.length + wrongAnswers.length === 0
             ? 0
             : Math.round(
-                ((correctAnswers.length + wrongAnswers.length) / words.length) *
+                ((correctAnswers.length + wrongAnswers.length) / quiz.length) *
                   100 *
                   10
               ) / 10}
           % ({correctAnswers.length + wrongAnswers.length} &thinsp;/ &thinsp;
-          {words.length})
+          {quiz.length})
           <br />
           正解率:
           {correctAnswers.length + wrongAnswers.length === 0
@@ -88,7 +100,7 @@ const App = () => {
         <div className="genres">
           {genres.map((g) => (
             <div
-              className={`genre ${g == genre && "current"}`}
+              className={`genre ${g === genre && "current"}`}
               onClick={() => setGenre(g)}
             >
               {g}
