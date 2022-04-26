@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 const shuffledIndex = () => {
   let arr = [];
   for (let i = 0; i < words.length; i++) {
-    arr.push(i);
+    if (words[i][0] === "新規") arr.push(i);
   }
 
   for (let i = arr.length - 1; i >= 0; i--) {
@@ -55,7 +55,7 @@ const App = () => {
         ))}
       </div>
       <div className="center">
-        <h4>
+        <div className="correct-rate">
           正解率:
           {correctAnswers.length + wrongAnswers.length === 0
             ? 0
@@ -65,8 +65,9 @@ const App = () => {
                   100 *
                   10
               ) / 10}
-          %
-        </h4>
+          % ({correctAnswers.length} / &thinsp;
+          {correctAnswers.length + wrongAnswers.length})
+        </div>
         <h3 className="category">{words[index[count]][0]}</h3>
         <h1 className="quiz">{words[index[count]][1]}</h1>
         {isAnswerShow ? (
