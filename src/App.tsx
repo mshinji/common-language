@@ -46,6 +46,7 @@ const App = () => {
       <div className="left">
         {wrongAnswers.map((wrongAnswer) => (
           <Tooltip
+            className="pointer"
             classes={{ tooltip: classes.tooltip }}
             title={words[wrongAnswer][2]}
             placement="right-end"
@@ -85,6 +86,7 @@ const App = () => {
           <>
             <div className="result">
               <FontAwesomeIcon
+                className="pointer"
                 icon={faXmark}
                 color="red"
                 size="3x"
@@ -99,6 +101,7 @@ const App = () => {
                 }}
               />
               <FontAwesomeIcon
+                className="pointer"
                 icon={faCheck}
                 color="green"
                 size="3x"
@@ -125,6 +128,7 @@ const App = () => {
       <div className="right">
         {correctAnswers.map((correctAnswer) => (
           <Tooltip
+            className="pointer"
             classes={{ tooltip: classes.tooltip }}
             title={words[correctAnswer][2]}
             placement="left-end"
