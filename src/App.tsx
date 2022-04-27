@@ -57,9 +57,6 @@ const App = () => {
           10 +
         "%"
     );
-    setQuiz(shuffledIndex(genre));
-    setCorrectAnswers([]);
-    setWrongAnswers([]);
   };
 
   useEffect(() => {
