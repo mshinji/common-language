@@ -72,6 +72,7 @@ const App = () => {
     setQuiz(shuffledIndex(genre));
     setCorrectAnswers([]);
     setWrongAnswers([]);
+    setIsAnswerShow(false);
   }, [genre]);
 
   return quiz.length === 0 ? (
