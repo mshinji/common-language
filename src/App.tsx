@@ -34,7 +34,7 @@ const App = () => {
     "ECモール",
     "SNS",
     "デザイン",
-    "ビジネス用語",
+    "ビジネス",
   ];
 
   const [count, setCount] = useState(0);
